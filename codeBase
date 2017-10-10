@@ -5,4 +5,15 @@
 	//3
 	//4
 	//5
+	/*
+		$GLOBALS
+		$_SERVER
+		$_REQUEST
+		$_POST
+		$_GET
+		$_FILES
+		$_ENV
+		$_COOKIE
+		$thisSession  = isset($_SESSION) ? $_SESSION : array();
+	*/
 ?>
