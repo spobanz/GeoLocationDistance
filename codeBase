@@ -1,5 +1,4 @@
 <?PHP
-	//comments
   function distanceBirdFly($lat1, $lon1, $lat2, $lon2, $this_measure) {
 
     switch($this_measure) {
