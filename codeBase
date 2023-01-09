@@ -1,21 +1,43 @@
 <?PHP
-	function distanceBirdFly($lat1, $lon1, $lat2, $lon2) {
-		//$earthRadius = 3959; //miiles
-		$earthRadius =  6371 //kilometer
-		$dLat = deg2rad($lat2 - $lat1);
-		$dLon = deg2rad($lon2 - $lon1);
-		$a = sin($dLat/2) * sin($dLat/2) +
-			cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
-			sin($dLon/2) * sin($dLon/2);
-		$c = 2 * atan2(sqrt($a), sqrt(1-$a));
-		$d = $earthRadius * $c;
-		//$milesPerKilometer = ($d*0.621371);
-		return $d;
-	}
-	$lat1 = 40.7128;
-	$lon1 = -74.0060;
-	$lat2 = 34.0522;
-	$lon2 = -118.2437;
-	$distance = distanceBirdFly($lat1, $lon1, $lat2, $lon2, 0);
-	echo "The distance between New York & Los Angeles is ".$distance." kilometers.";
+
+class DistanceCalculator {
+  private float $earthRadius;
+
+  public function __construct(string $unit = 'kilometers') {
+    $this->earthRadius = $unit === 'miles' ? 3959.0 : 6371.0;
+  }
+
+  public function distance(float $lat1, float $lon1, float $lat2, float $lon2): float {
+    $dLat = deg2rad($lat2 - $lat1);
+    $dLon = deg2rad($lon2 - $lon1);
+    $a = sin($dLat/2) * sin($dLat/2) +
+          cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+          sin($dLon/2) * sin($dLon/2);
+    $c = 2.0 * atan2(sqrt($a), sqrt(1.0-$a));
+    $d = $this->earthRadius * $c;
+    return $d;
+  }
+}
+
 ?>
+
+<?PHP
+$calculator = new DistanceCalculator();
+$lat1 = 40.7128;
+$lon1 = -74.0060;
+$lat2 = 34.0522;
+$lon2 = -118.2437;
+$distance = $calculator->distance($lat1, $lon1, $lat2, $lon2);
+echo "The distance between the two points is $distance kilometers.";
+
+
+$calculator = new DistanceCalculator('miles');
+$lat1 = 40.7128;
+$lon1 = -74.0060;
+$lat2 = 34.0522;
+$lon2 = -118.2437;
+$distance = $calculator->distance($lat1, $lon1, $lat2, $lon2);
+echo "The distance between the two points is $distance miles.";
+
+?>
+
