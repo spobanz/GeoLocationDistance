@@ -12,12 +12,10 @@
 		//$milesPerKilometer = ($d*0.621371);
 		return $d;
 	}
-
-  $lat1 = 40.7128;
-  $lon1 = -74.0060;
-  $lat2 = 34.0522;
-  $lon2 = -118.2437;
-  $distance = distanceBirdFly($lat1, $lon1, $lat2, $lon2, 0);
-  echo "The distance between New York and Los Angeles is $distance kilometers.";
-	
+	$lat1 = 40.7128;
+	$lon1 = -74.0060;
+	$lat2 = 34.0522;
+	$lon2 = -118.2437;
+	$distance = distanceBirdFly($lat1, $lon1, $lat2, $lon2, 0);
+	echo "The distance between New York & Los Angeles is ".$distance." kilometers.";
 ?>
